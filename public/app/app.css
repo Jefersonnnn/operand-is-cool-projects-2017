@@ -3,3 +3,12 @@
     margin-right: 5px;
     margin-bottom: 5px;
 }
+
+.positivo {
+    color: deepskyblue;
+}
+.negativo {
+    color: red;
+    font-weight: 600;
+}
+

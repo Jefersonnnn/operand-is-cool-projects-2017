@@ -38,6 +38,6 @@ services:
         environment:
             - TERM=xterm
             - MYSQL_ROOT_PASSWORD=123456
-            - PMA_HOST=192.168.106.84
+            - PMA_HOST=192.168.15.8
         ports:
           - "83:80"
