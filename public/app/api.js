@@ -18,8 +18,8 @@ var app = new Vue({
         selectOriginTransfModel: 1,
         selectDestinyTransfModel: 2,
 
-        selectAccountView1 : 0,
-        selectAccountView2 : 0,
+        selectAccountView1 : 1,
+        selectAccountView2 : 2,
 
         bankAccount1: {
             id: 0,
@@ -36,8 +36,11 @@ var app = new Vue({
     },
 	watch: {
 		selectAccountView1: function(val) {
-			this.bankAccount1 = listAccounts[selectAccountView1];
-		}
+			this.bankAccount1 = this.listAccounts[val];
+		},
+        selectAccountView2: function(val) {
+            this.bankAccount2 = this.listAccounts[val];
+        }
 	},
     created: function () {
         console.log('Instância Vue.js criada!');
@@ -50,6 +53,8 @@ var app = new Vue({
             axios.get('/v1/bankaccounts/listAndOp')
                 .then(function (response) {
                     vm.listAccounts = response.data;
+                    vm.bankAccount1 = vm.listAccounts[vm.selectAccountView1];
+                    vm.bankAccount2 = vm.listAccounts[vm.selectAccountView2];
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -108,15 +113,9 @@ var app = new Vue({
 
         setInterval(function () {
             vm.loadAccounts();
-
         }, 30000);
         this.loadAccounts();
-		
-		setInterval(function () {
-            vm.bankAccount1 = vm.listAccounts[vm.selectAccountView1];
-            vm.bankAccount2 = vm.listAccounts[vm.selectAccountView2];
 
-        }, 500);
     }
 });
 
